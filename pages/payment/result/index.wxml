@@ -1,0 +1,19 @@
+<view class="result-page">
+  <view class="result-card card-shadow">
+    <view class="result-icon {{status === 'success' ? 'icon-success' : 'icon-fail'}}">
+      {{status === 'success' ? '✓' : '!'}}
+    </view>
+    <view class="result-title">{{status === 'success' ? '支付成功' : '支付失败'}}</view>
+    <view class="result-desc">
+      {{status === 'success' ? '订单已提交，可前往查看当前拼团详情。' : '本次支付未完成，你可以重新支付或返回首页。'}}
+    </view>
+
+    <button class="primary-button result-button" bindtap="handlePrimaryAction">
+      {{status === 'success' ? '查看拼团详情' : '重新支付'}}
+    </button>
+
+    <button wx:if="{{status === 'fail'}}" class="secondary-text-button" bindtap="handleSecondaryAction">
+      返回首页
+    </button>
+  </view>
+</view>

@@ -1,0 +1,54 @@
+<view class="payment-page">
+  <loading-view loading="{{loading}}" text="支付信息加载中..." />
+
+  <scroll-view wx:if="{{!loading && courseDetail}}" class="payment-scroll" scroll-y>
+    <view class="payment-content">
+      <view class="page-section card-shadow">
+        <view class="section-title">订单信息</view>
+        <view class="order-title">{{courseDetail.title}}</view>
+        <view class="order-item">
+          <view class="order-label">上课时间</view>
+          <view class="order-value">{{courseDetail.timeText}}</view>
+        </view>
+        <view class="order-item">
+          <view class="order-label">上课地点</view>
+          <view class="order-value">{{courseDetail.locationText}}</view>
+        </view>
+        <view class="order-item price-item">
+          <view class="order-label">支付金额</view>
+          <view class="payment-price">¥{{courseDetail.groupPriceText}}</view>
+        </view>
+      </view>
+
+      <view class="page-section card-shadow">
+        <view class="section-title">拼团说明</view>
+        <view class="section-desc">满 {{courseDetail.targetCount}} 人成团</view>
+        <view class="section-desc">
+          拼团截止时间：{{groupDetail ? groupDetail.deadlineText : '开课前 12 小时'}}
+        </view>
+        <view class="section-desc">
+          未成团退款规则：{{groupDetail ? groupDetail.refundDesc : '未成团将自动原路退款'}}
+        </view>
+        <rich-text class="rich-text" nodes="{{courseDetail.paymentGroupNoteNodes}}"></rich-text>
+      </view>
+
+      <view class="page-section card-shadow">
+        <checkbox-group bindchange="handleAgreementChange">
+          <label class="agreement-row">
+            <checkbox value="agree" checked="{{agreementChecked}}" color="#1677ff" />
+            <view class="agreement-text">我已阅读并同意《课程服务协议》</view>
+          </label>
+        </checkbox-group>
+      </view>
+
+      <view class="bottom-placeholder"></view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{!loading && courseDetail}}" class="payment-bar">
+    <button class="primary-button payment-button" bindtap="handleConfirmPay" loading="{{paying}}">
+      确认支付
+    </button>
+    <button class="mock-fail-button" bindtap="handleMockFail">模拟支付失败</button>
+  </view>
+</view>

@@ -1,0 +1,52 @@
+<view class="agreement-page">
+  <view class="agreement-header">
+    <view class="agreement-title">欢迎使用邻动体适能</view>
+    <view class="agreement-subtitle">首次使用前，请先阅读并同意《用户协议》和《隐私政策》</view>
+  </view>
+
+  <view class="agreement-tabs">
+    <view
+      class="agreement-tab {{activeTab === 'user' ? 'agreement-tab-active' : ''}}"
+      data-tab="user"
+      bindtap="handleTabChange"
+    >
+      用户协议
+    </view>
+    <view
+      class="agreement-tab {{activeTab === 'privacy' ? 'agreement-tab-active' : ''}}"
+      data-tab="privacy"
+      bindtap="handleTabChange"
+    >
+      隐私政策
+    </view>
+  </view>
+
+  <scroll-view class="agreement-content" scroll-y>
+    <rich-text
+      wx:if="{{activeTab === 'user'}}"
+      class="agreement-rich-text"
+      nodes="{{userAgreementNodes}}"
+    ></rich-text>
+    <rich-text
+      wx:else
+      class="agreement-rich-text"
+      nodes="{{privacyPolicyNodes}}"
+    ></rich-text>
+  </scroll-view>
+
+  <view class="agreement-footer">
+    <checkbox-group bindchange="handleAgreementChange">
+      <label class="agreement-checkbox">
+        <checkbox value="agreed" color="#1677ff" checked="{{agreed}}" />
+        <view class="agreement-checkbox-text">
+          我已阅读并同意《用户协议》和《隐私政策》
+        </view>
+      </label>
+    </checkbox-group>
+
+    <view class="agreement-actions">
+      <button class="footer-button reject-button" bindtap="handleRejectTap">拒绝</button>
+      <button class="footer-button agree-button" bindtap="handleAgree">同意并进入</button>
+    </view>
+  </view>
+</view>

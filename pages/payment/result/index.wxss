@@ -1,0 +1,68 @@
+.result-page {
+  min-height: 100vh;
+  padding: 24rpx;
+  background: #f7f8fa;
+}
+
+.result-card {
+  margin-top: 120rpx;
+  padding: 56rpx 40rpx;
+  border-radius: 32rpx;
+  background: #ffffff;
+  text-align: center;
+}
+
+.result-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+  height: 120rpx;
+  margin: 0 auto;
+  border-radius: 50%;
+  font-size: 56rpx;
+  font-weight: 700;
+}
+
+.icon-success {
+  background: #e8f7ee;
+  color: #1f9d63;
+}
+
+.icon-fail {
+  background: #fff1f0;
+  color: #ff4d4f;
+}
+
+.result-title {
+  margin-top: 28rpx;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1f2329;
+}
+
+.result-desc {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  line-height: 1.8;
+  color: #5f6b7a;
+}
+
+.result-button {
+  margin-top: 40rpx;
+}
+
+.secondary-text-button {
+  height: 72rpx;
+  margin-top: 20rpx;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #5f6b7a;
+  font-size: 26rpx;
+  line-height: 72rpx;
+}
+
+.secondary-text-button::after {
+  border: none;
+}

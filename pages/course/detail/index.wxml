@@ -1,0 +1,126 @@
+<view class="detail-page">
+  <loading-view loading="{{loading}}" text="详情加载中..." />
+
+  <scroll-view wx:if="{{!loading && courseDetail}}" class="detail-scroll" scroll-y>
+    <swiper class="hero-swiper" indicator-dots autoplay circular>
+      <swiper-item wx:for="{{courseDetail.images}}" wx:key="*this">
+        <image class="hero-image" src="{{item}}" mode="aspectFill"></image>
+      </swiper-item>
+    </swiper>
+
+    <view class="detail-content">
+      <view class="page-section card-shadow">
+        <view class="title-row">
+          <view class="course-title">{{courseDetail.title}}</view>
+          <view class="group-chip">{{courseDetail.targetCount}}人成团</view>
+        </view>
+
+        <view class="price-row">
+          <view class="group-price">¥{{courseDetail.groupPriceText}}</view>
+          <view class="original-price">¥{{courseDetail.originalPriceText}}</view>
+          <view class="joined-chip">已拼 {{courseDetail.joinedCount}} 人</view>
+        </view>
+
+        <view class="info-list">
+          <view class="info-item">
+            <view class="info-label">上课时间</view>
+            <view class="info-value">{{courseDetail.timeText}}</view>
+          </view>
+          <view class="info-item">
+            <view class="info-label">上课地点</view>
+            <view class="info-value">{{courseDetail.locationText}}</view>
+          </view>
+          <view class="info-item">
+            <view class="info-label">适用年龄</view>
+            <view class="info-value">{{courseDetail.ageRange}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="page-section card-shadow">
+        <view class="section-title">课程介绍</view>
+        <rich-text class="rich-text" nodes="{{courseDetail.descriptionNodes}}"></rich-text>
+      </view>
+
+      <view class="page-section card-shadow">
+        <view class="section-title">拼团规则</view>
+        <rich-text class="rich-text" nodes="{{courseDetail.groupRuleNodes}}"></rich-text>
+      </view>
+
+      <view class="page-section card-shadow">
+        <view class="section-title">教练信息</view>
+        <view class="coach-name">{{courseDetail.coach.name}}</view>
+        <view class="coach-intro">{{courseDetail.coach.intro}}</view>
+        <view class="certificate-list">
+          <image
+            wx:for="{{courseDetail.coach.certificates}}"
+            wx:key="*this"
+            class="certificate-image"
+            src="{{item}}"
+            mode="aspectFill"
+            data-url="{{item}}"
+            bindtap="handlePreviewCertificate"
+          ></image>
+        </view>
+      </view>
+
+      <view class="page-section card-shadow insurance-card">
+        <view class="section-title">保险说明</view>
+        <view class="section-desc insurance-text">{{courseDetail.insuranceText}}</view>
+      </view>
+
+      <view class="page-section card-shadow">
+        <view class="section-title">当前拼团状态</view>
+        <view wx:if="{{activeGroup}}" class="group-panel">
+          <view class="group-progress-row">
+            <view class="group-progress-text">拼团进度 {{activeGroup.progressText}}</view>
+            <view class="group-remaining">剩余 {{activeGroup.remainingTimeText}}</view>
+          </view>
+          <view class="progress-track">
+            <view class="progress-bar" style="width: {{activeGroup.progressPercent}};"></view>
+          </view>
+          <view class="member-list">
+            <image
+              wx:for="{{activeGroup.members}}"
+              wx:key="avatar"
+              class="member-avatar"
+              src="{{item.avatar}}"
+              mode="aspectFill"
+            ></image>
+          </view>
+        </view>
+
+        <view wx:else class="group-empty">
+          <view class="section-desc">暂无进行中的拼团，立即开团吧</view>
+        </view>
+      </view>
+
+      <view class="bottom-space"></view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{!loading && courseDetail}}" class="bottom-bar">
+    <view class="service-entry" bindtap="handleOpenService">
+      <view class="service-icon">客</view>
+      <view class="service-text">客服</view>
+    </view>
+    <button class="primary-button bottom-action" bindtap="handleGoPayment">
+      {{activeGroup ? '去参团' : '立即开团'}}
+    </button>
+  </view>
+
+  <base-modal
+    visible="{{showServiceModal}}"
+    title="联系客服"
+    confirmText="我知道了"
+    cancelText="关闭"
+    bindclose="handleCloseService"
+    bindcancel="handleCloseService"
+    bindconfirm="handleConfirmService"
+  >
+    <view class="service-modal-content">
+      <image class="service-qrcode" src="{{courseDetail.serviceQrCode}}" mode="aspectFit"></image>
+      <view class="service-tip">请使用微信扫码联系专属客服</view>
+    </view>
+  </base-modal>
+</view>

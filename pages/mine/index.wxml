@@ -1,0 +1,69 @@
+<view class="app-page mine-page">
+  <view class="profile-card card-shadow">
+    <view class="profile-main">
+      <view class="avatar-box">
+        <image
+          wx:if="{{userInfo && userInfo.avatarUrl}}"
+          class="avatar-image"
+          src="{{userInfo.avatarUrl}}"
+          mode="aspectFill"
+        />
+        <view wx:else class="avatar-placeholder">邻</view>
+      </view>
+      <view class="profile-info">
+        <view class="profile-name">{{userInfo ? userInfo.nickName : '未登录用户'}}</view>
+        <view class="profile-desc">
+          {{userInfo ? '已完成微信授权登录，当前展示昵称与头像等基础资料。' : '支持浏览课程，报名与拼团将在登录授权后开启。'}}
+        </view>
+      </view>
+    </view>
+
+    <button
+      wx:if="{{!userInfo}}"
+      class="primary-button login-button"
+      bindtap="handleLogin"
+      loading="{{loginLoading}}"
+    >
+      点击登录
+    </button>
+
+    <button
+      wx:if="{{userInfo}}"
+      class="primary-button secondary-button logout-button"
+      bindtap="handleLogout"
+    >
+      退出登录
+    </button>
+  </view>
+
+  <view class="menu-card card-shadow">
+    <view
+      wx:for="{{menuList}}"
+      wx:key="key"
+      class="menu-item"
+      data-key="{{item.key}}"
+      bindtap="handleMenuTap"
+    >
+      <view>
+        <view class="menu-title">{{item.title}}</view>
+        <view class="menu-desc">{{item.desc}}</view>
+      </view>
+      <view class="menu-arrow">></view>
+    </view>
+  </view>
+
+  <base-modal
+    visible="{{showServiceModal}}"
+    title="联系客服"
+    confirmText="我知道了"
+    cancelText="关闭"
+    bindclose="handleCloseService"
+    bindcancel="handleCloseService"
+    bindconfirm="handleConfirmService"
+  >
+    <view class="service-modal-content">
+      <image class="service-qrcode" src="{{serviceQrCode}}" mode="aspectFit"></image>
+      <view class="service-tip">请使用微信扫码联系专属客服</view>
+    </view>
+  </base-modal>
+</view>

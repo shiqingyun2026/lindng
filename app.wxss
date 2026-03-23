@@ -1,0 +1,69 @@
+page {
+  min-height: 100%;
+  background: #f7f8fa;
+  color: #1f2329;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+view,
+text,
+button,
+navigator,
+swiper,
+image {
+  box-sizing: border-box;
+}
+
+.app-page {
+  min-height: 100vh;
+  padding: 24rpx;
+}
+
+.page-section {
+  margin-bottom: 24rpx;
+  padding: 28rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1f2329;
+}
+
+.section-desc {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #8f96a3;
+}
+
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 88rpx;
+  border-radius: 999rpx;
+  border: none;
+  background: #1677ff;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.primary-button::after {
+  border: none;
+}
+
+.secondary-button {
+  border: 2rpx solid #d9e3f0;
+  background: #ffffff;
+  color: #1677ff;
+}
+
+.card-shadow {
+  box-shadow: 0 12rpx 36rpx rgba(31, 35, 41, 0.06);
+}

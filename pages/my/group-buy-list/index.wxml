@@ -1,0 +1,59 @@
+<view class="app-page my-group-list-page">
+  <view class="tab-bar card-shadow">
+    <view
+      wx:for="{{tabs}}"
+      wx:key="key"
+      class="tab-item {{activeTab === item.key ? 'tab-item-active' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="handleTabTap"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <loading-view loading="{{loading}}" text="拼团记录加载中..." />
+
+  <view wx:if="{{!loading && groupList.length}}" class="group-list">
+    <view
+      wx:for="{{groupList}}"
+      wx:key="groupId"
+      class="group-card card-shadow"
+      data-group-id="{{item.groupId}}"
+      bindtap="handleOpenDetail"
+    >
+      <image class="group-cover" src="{{item.cover}}" mode="aspectFill"></image>
+
+      <view class="group-content">
+        <view class="group-title-row">
+          <view class="group-title">{{item.title}}</view>
+          <view
+            class="status-tag {{item.status === 'ongoing' ? 'status-ongoing' : item.status === 'success' ? 'status-success' : 'status-failed'}}"
+          >
+            {{item.statusText}}
+          </view>
+        </view>
+
+        <view class="group-meta">{{item.timeText}}</view>
+        <view class="group-meta">{{item.locationText}}</view>
+      </view>
+    </view>
+  </view>
+
+  <empty-state
+    wx:if="{{!loading && !groupList.length}}"
+    title="暂无拼团记录"
+    desc="切换状态筛选或稍后下拉刷新再试。"
+  />
+
+  <view wx:if="{{groupList.length}}" class="list-footer">
+    <block wx:if="{{loadingMore}}">
+      <view class="footer-text">加载中...</view>
+    </block>
+    <block wx:elif="{{!hasMore}}">
+      <view class="footer-text">没有更多拼团了</view>
+    </block>
+    <block wx:else>
+      <view class="footer-text">上拉加载更多</view>
+    </block>
+  </view>
+</view>
